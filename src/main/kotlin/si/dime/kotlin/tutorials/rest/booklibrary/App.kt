@@ -32,8 +32,8 @@ class image {
 }
 
 class tamaño{
-    var ancho: Int = 0
     var alto: Int = 0
+    var ancho: Int = 0
 }
 
 
@@ -181,18 +181,17 @@ class Ejercicio4 {
         val w = image2.width
         val h = image2.height
 
-        val factorW = w/req.tamaño.ancho
-        val factorH = h/req.tamaño.alto
+        val factorW = (w.toFloat()/(req.tamaño.ancho).toFloat())
+        val factorH = (h.toFloat()/(req.tamaño.alto).toFloat())
 
-        val newW: Int = (w/factorW)
-        val newH: Int = (h/factorH)
+        val newW = (w/factorW).toInt()
+        val newH = (h/factorH).toInt()
 
-        val new_img: BufferedImage = BufferedImage(newW,newH,1)
-
-        for(x in 0..newW - 1){
-            for(y in 0..newH - 1){
-                val pixel = image2.getRGB((x * factorW), (y * factorH))
-                new_img.setRGB(x, y, pixel)
+        val new_img: BufferedImage = BufferedImage(newW,newH,BufferedImage.TYPE_INT_RGB)
+        for(x in 0 until newW){
+            for(y in 0 until newH){
+                val pixel = image2.getRGB((x*factorW).toInt(), (y*factorH).toInt())
+                new_img.setRGB(x,y, pixel)
             }
         }
 
